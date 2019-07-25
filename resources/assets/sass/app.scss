@@ -2,7 +2,22 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+// @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
+
+// @import "~bootstrap/scss/mixins";
+
+// common
+@import "common.scss";
+
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+// CoreUI default layout.
+// @import "node_modules/@coreui/coreui-pro/scss/coreui";
+// @import "node_modules/font-awesome/scss/font-awesome.scss";
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}

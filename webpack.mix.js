@@ -23,17 +23,20 @@ mix.webpackConfig({
  */
 mix.copyDirectory('resources/assets/img', 'public/img');
 
-mix.js('resources/assets/js/app.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css');
+mix.js('resources/assets/js/app.js', 'public/build/js')
+    .sass('resources/assets/sass/app.scss', 'public/build/css');
 
 mix.styles([
     'node_modules/bootstrap/dist/css/bootstrap.min.css',
     'node_modules/admin-lte/dist/css/AdminLTE.css',
     'node_modules/admin-lte/dist/css/skins/_all-skins.min.css',
-], 'public/css/app.css');
+], 'public/build/css/vendor.css');
 
 mix.scripts([
     'node_modules/admin-lte/dist/js/demo.js',
-], 'public/js/app.js');
+], 'public/build/js/vendor.js');
+
+mix.styles(['public/build/css/vendor.css', 'public/build/css/app.css'], 'public/css/app.css');
+mix.scripts(['public/build/js/app.js', 'public/build/js/vendor.js'], 'public/js/app.js');
 
 mix.disableNotifications();

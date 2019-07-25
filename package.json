@@ -7,27 +7,34 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
+        "eslint": "eslint 'resources/assets/admin/js/**/*.{js,vue}'",
+        "eslint:fix": "eslint 'resources/assets/admin/js/**/*.{js,vue}' --fix",
+        "eslint:watch": "chokidar 'resources/assets/admin/js/**/*.js' 'resources/assets/admin/js/**/*.vue' -c 'npm run eslint:fix'",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.19",
-        "bootstrap": "^4.1.0",
+        "axios": "^0.18",
+        "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
+        "eslint": "^5.10.0",
         "jquery": "^3.2",
-        "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.13",
+        "laravel-mix": "^2.0",
+        "less": "^2.7.2",
+        "lodash": "^4.17.4",
         "popper.js": "^1.12",
-        "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
-        "sass-loader": "^7.1.0",
-        "vue": "^2.5.17",
-        "vue-template-compiler": "^2.6.10"
+        "vue": "^2.5.7",
+        "vuex": "^3.0.1"
     },
     "dependencies": {
-        "admin-lte": "^2.4.15",
-        "vue-axios": "^2.1.4",
+        "@fortawesome/fontawesome-svg-core": "^1.2.7",
+        "@fortawesome/free-solid-svg-icons": "^5.4.2",
+        "@fortawesome/vue-fontawesome": "^0.1.2",
+        "admin-lte": "^2.4.8",
+        "bootstrap": "^3.3.7",
+        "chokidar-cli": "^1.2.1",
+        "npm": "^6.4.1",
         "vue-i18n": "^8.12.0",
-        "vue-router": "^3.0.7",
-        "vuex": "^3.1.1"
+        "vue-router": "^3.0.1",
+        "vue-toasted": "^1.1.25"
     }
 }
