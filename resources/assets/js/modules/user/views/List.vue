@@ -15,21 +15,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-body">
-                    <div>
+                <div class="box-body" v-if="listMembers">
+                    <div v-if="listMembers.length">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr class="label-primary">
                                     <th class="center-content">{{ $t('common.number') }}</th>
                                     <th scope="col">{{ $t('common.name') }}</th>
                                     <th scope="col">{{ $t('common.email') }}</th>
+                                    <th scope="col" class="action-table">{{ $t('common.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="center-content">1</td>
-                                    <td>justin</td>
-                                    <td>justin@example.com</td>
+                                <tr v-for="(member, index) in listMembers" :key="index">
+                                    <td class="center-content">{{ index + 1 }}</td>
+                                    <td>{{ member.name }}</td>
+                                    <td>{{ member.email }}</td>
+                                    <td class="action-table">
+                                        <router-link class="btn btn-default btn-edit btn-xs btn-flat" :to="{ path: `/members/edit/${member.id}` }">
+                                            <i class="fa fa-pencil"></i>
+                                        </router-link>
+                                        <button class="btn btn-danger btn-xs member__action bnt-delete btn-flat">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -41,7 +50,34 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: 'ListMember',
+    data() {
+        return {
+            listMembers: null,
+        };
+    },
+
+    computed: {
+        ...mapState({
+            members: state => state.storeMember.listMembers,
+        }),
+    },
+
+    async created() {
+        this.getMemberList();
+    },
+
+    methods: {
+        async getMemberList() {
+            await this.$store.dispatch('actionGetMembers', {
+                vue: this,
+            });
+
+            this.listMembers = this.members;
+        },
+    }
 }
 </script>

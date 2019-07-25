@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
+import store from './store';
 import routes from './routes';
 import VueI18n from 'vue-i18n';
 import enMessage from '@/lang/en.json';
@@ -27,6 +28,7 @@ const i18n = new VueI18n({
 
 new Vue({
     el: '#app',
+    store,
     i18n,
     render: h => h(App),
     router,

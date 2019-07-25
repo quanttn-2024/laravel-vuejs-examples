@@ -9,6 +9,7 @@
         "email": "Email",
         "dashboard": "Dashboard",
         "publish": "Publish",
-        "back": "Back"
+        "back": "Back",
+        "actions": "Actions"
     }
 }
