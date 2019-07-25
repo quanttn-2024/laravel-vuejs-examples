@@ -76,4 +76,17 @@ class UserService
             'email' => $user->email,
         ];
     }
+
+
+    /**
+     * Delete user by id
+     *
+     * @param int $id;
+     *
+     * @return int
+     */
+    public function deleteUser($id)
+    {
+        return $this->userRepository->destroy($id);
+    }
 }

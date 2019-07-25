@@ -38,4 +38,17 @@ export default class MemberService {
             .then(response => response)
             .catch(error => error);
     }
+
+    /**
+     * Delete a member
+     *
+     * @param id
+     *
+     * @returns {AxiosPromise}
+     */
+    static destroy(id) {
+        return axios.delete(`/api/users/${ id }`)
+            .then(response => response)
+            .catch(error => error);
+    }
 }

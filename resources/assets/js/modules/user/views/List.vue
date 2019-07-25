@@ -35,7 +35,7 @@
                                         <router-link class="btn btn-default btn-edit btn-xs btn-flat" :to="{ path: `/members/edit/${member.id}` }">
                                             <i class="fa fa-pencil"></i>
                                         </router-link>
-                                        <button class="btn btn-danger btn-xs member__action bnt-delete btn-flat">
+                                        <button class="btn btn-danger btn-xs member__action bnt-delete btn-flat" @click="destroy(member.id)">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -63,6 +63,7 @@ export default {
     computed: {
         ...mapState({
             members: state => state.storeMember.listMembers,
+            deleteSuccess: state => state.storeMember.deleteMember,
         }),
     },
 
@@ -77,6 +78,15 @@ export default {
             });
 
             this.listMembers = this.members;
+        },
+
+        destroy(id) {
+            this.$store.dispatch('actionDeleteMember', {
+                vue: this,
+                id: id,
+            });
+
+            this.getMemberList();
         },
     }
 }

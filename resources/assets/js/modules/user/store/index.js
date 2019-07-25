@@ -4,12 +4,14 @@ const LIST_MEMBER = 'LIST_MEMBER';
 const CREATE_SUCCESS = 'CREATE_SUCCESS';
 const ERRORS_MEMBER = 'ERRORS_MEMBER';
 const DETAIL_MEMBER = 'DETAIL_MEMBER';
+const DELETE_MEMBER = 'DELETE_MEMBER';
 
 const state = {
     listMembers: null,
     createSucces: false,
     errors: null,
-    detailMember: null
+    detailMember: null,
+    deleteMember: false,
 };
 const mutations = {
     [LIST_MEMBER](state, { listMembers }) {
@@ -25,6 +27,10 @@ const mutations = {
 
     [DETAIL_MEMBER](state, { detailMember }) {
         return state.detailMember = detailMember;
+    },
+
+    [DELETE_MEMBER](state, { deleteMember }) {
+        return state.deleteMember = deleteMember;
     },
 };
 
@@ -61,6 +67,16 @@ const actions = {
         if (response.status === 200) {
             return commit(DETAIL_MEMBER, { detailMember: response.data });
         }
+    },
+
+    async actionDeleteMember ({ commit }, { vue, id }) {
+        let response = await MemberService.destroy(id);
+
+        if (response.status === 200) {
+            return commit(DELETE_MEMBER, { status: true });
+        }
+
+        commit(DELETE_MEMBER, { status: false });
     },
 };
 

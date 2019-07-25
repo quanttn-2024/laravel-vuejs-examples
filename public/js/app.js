@@ -17494,12 +17494,14 @@ var LIST_MEMBER = 'LIST_MEMBER';
 var CREATE_SUCCESS = 'CREATE_SUCCESS';
 var ERRORS_MEMBER = 'ERRORS_MEMBER';
 var DETAIL_MEMBER = 'DETAIL_MEMBER';
+var DELETE_MEMBER = 'DELETE_MEMBER';
 
 var state = {
     listMembers: null,
     createSucces: false,
     errors: null,
-    detailMember: null
+    detailMember: null,
+    deleteMember: false
 };
 var mutations = (_mutations = {}, _defineProperty(_mutations, LIST_MEMBER, function (state, _ref) {
     var listMembers = _ref.listMembers;
@@ -17517,13 +17519,17 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, LIST_MEMBER, funct
     var detailMember = _ref4.detailMember;
 
     return state.detailMember = detailMember;
+}), _defineProperty(_mutations, DELETE_MEMBER, function (state, _ref5) {
+    var deleteMember = _ref5.deleteMember;
+
+    return state.deleteMember = deleteMember;
 }), _mutations);
 
 var actions = {
     actionGetMembers: function () {
-        var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref5, _ref6) {
-            var commit = _ref5.commit;
-            var vue = _ref6.vue;
+        var _ref8 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref6, _ref7) {
+            var commit = _ref6.commit;
+            var vue = _ref7.vue;
             var response;
             return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                 while (1) {
@@ -17551,16 +17557,16 @@ var actions = {
         }));
 
         function actionGetMembers(_x, _x2) {
-            return _ref7.apply(this, arguments);
+            return _ref8.apply(this, arguments);
         }
 
         return actionGetMembers;
     }(),
     actionCreateMember: function () {
-        var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref8, _ref9) {
-            var commit = _ref8.commit;
-            var vue = _ref9.vue,
-                params = _ref9.params;
+        var _ref11 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref9, _ref10) {
+            var commit = _ref9.commit;
+            var vue = _ref10.vue,
+                params = _ref10.params;
             var response, errorResponse;
             return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                 while (1) {
@@ -17599,16 +17605,16 @@ var actions = {
         }));
 
         function actionCreateMember(_x3, _x4) {
-            return _ref10.apply(this, arguments);
+            return _ref11.apply(this, arguments);
         }
 
         return actionCreateMember;
     }(),
     actionShowMember: function () {
-        var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref11, _ref12) {
-            var commit = _ref11.commit;
-            var vue = _ref12.vue,
-                id = _ref12.id;
+        var _ref14 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref12, _ref13) {
+            var commit = _ref12.commit;
+            var vue = _ref13.vue,
+                id = _ref13.id;
             var response;
             return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                 while (1) {
@@ -17636,10 +17642,51 @@ var actions = {
         }));
 
         function actionShowMember(_x5, _x6) {
-            return _ref13.apply(this, arguments);
+            return _ref14.apply(this, arguments);
         }
 
         return actionShowMember;
+    }(),
+    actionDeleteMember: function () {
+        var _ref17 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref15, _ref16) {
+            var commit = _ref15.commit;
+            var vue = _ref16.vue,
+                id = _ref16.id;
+            var response;
+            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                while (1) {
+                    switch (_context4.prev = _context4.next) {
+                        case 0:
+                            _context4.next = 2;
+                            return __WEBPACK_IMPORTED_MODULE_1__api__["a" /* default */].destroy(id);
+
+                        case 2:
+                            response = _context4.sent;
+
+                            if (!(response.status === 200)) {
+                                _context4.next = 5;
+                                break;
+                            }
+
+                            return _context4.abrupt('return', commit(DELETE_MEMBER, { status: true }));
+
+                        case 5:
+
+                            commit(DELETE_MEMBER, { status: false });
+
+                        case 6:
+                        case 'end':
+                            return _context4.stop();
+                    }
+                }
+            }, _callee4, this);
+        }));
+
+        function actionDeleteMember(_x7, _x8) {
+            return _ref17.apply(this, arguments);
+        }
+
+        return actionDeleteMember;
     }()
 };
 
@@ -18490,6 +18537,24 @@ var MemberService = function () {
         key: 'show',
         value: function show(id) {
             return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/users/' + id).then(function (response) {
+                return response;
+            }).catch(function (error) {
+                return error;
+            });
+        }
+
+        /**
+         * Delete a member
+         *
+         * @param id
+         *
+         * @returns {AxiosPromise}
+         */
+
+    }, {
+        key: 'destroy',
+        value: function destroy(id) {
+            return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete('/api/users/' + id).then(function (response) {
                 return response;
             }).catch(function (error) {
                 return error;
@@ -20293,6 +20358,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapState */])({
         members: function members(state) {
             return state.storeMember.listMembers;
+        },
+        deleteSuccess: function deleteSuccess(state) {
+            return state.storeMember.deleteMember;
         }
     })),
 
@@ -20349,7 +20417,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
 
             return getMemberList;
-        }()
+        }(),
+        destroy: function destroy(id) {
+            this.$store.dispatch('actionDeleteMember', {
+                vue: this,
+                id: id
+            });
+
+            this.getMemberList();
+        }
     }
 });
 
@@ -20463,7 +20539,19 @@ var render = function() {
                                     [_c("i", { staticClass: "fa fa-pencil" })]
                                   ),
                                   _vm._v(" "),
-                                  _vm._m(0, true)
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-danger btn-xs member__action bnt-delete btn-flat",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.destroy(member.id)
+                                        }
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fa fa-trash" })]
+                                  )
                                 ],
                                 1
                               )
@@ -20481,20 +20569,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-danger btn-xs member__action bnt-delete btn-flat"
-      },
-      [_c("i", { staticClass: "fa fa-trash" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
