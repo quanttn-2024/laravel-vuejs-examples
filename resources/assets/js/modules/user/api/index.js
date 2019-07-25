@@ -25,4 +25,17 @@ export default class MemberService {
             .then(response => response)
             .catch(error => error);
     }
+
+    /**
+     * Show a member
+     *
+     * @param id
+     *
+     * @returns {AxiosPromise<any>}
+     */
+    static show(id) {
+        return axios.get(`/api/users/${ id }`)
+            .then(response => response)
+            .catch(error => error);
+    }
 }

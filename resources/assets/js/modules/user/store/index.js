@@ -3,11 +3,13 @@ import MemberService from '../api';
 const LIST_MEMBER = 'LIST_MEMBER';
 const CREATE_SUCCESS = 'CREATE_SUCCESS';
 const ERRORS_MEMBER = 'ERRORS_MEMBER';
+const DETAIL_MEMBER = 'DETAIL_MEMBER';
 
 const state = {
     listMembers: null,
     createSucces: false,
     errors: null,
+    detailMember: null
 };
 const mutations = {
     [LIST_MEMBER](state, { listMembers }) {
@@ -19,6 +21,10 @@ const mutations = {
 
     [ERRORS_MEMBER](state, { errors }) {
         return state.errors = errors;
+    },
+
+    [DETAIL_MEMBER](state, { detailMember }) {
+        return state.detailMember = detailMember;
     },
 };
 
@@ -46,6 +52,14 @@ const actions = {
         if (errorResponse.status === 422){
             commit(CREATE_SUCCESS, { status: false });
             return commit(ERRORS_MEMBER, { errors: errorResponse.data.errors });
+        }
+    },
+
+    async actionShowMember ({ commit }, { vue, id }) {
+        let response = await MemberService.show(id);
+
+        if (response.status === 200) {
+            return commit(DETAIL_MEMBER, { detailMember: response.data });
         }
     },
 };

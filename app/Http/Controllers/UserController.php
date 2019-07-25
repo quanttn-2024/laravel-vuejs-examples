@@ -68,7 +68,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->userService->showUser($id);
+
+        return response()->json($user);
     }
 
     /**

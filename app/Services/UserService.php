@@ -58,4 +58,22 @@ class UserService
             return false;
         }
     }
+
+    /**
+     * Show user detail
+     *
+     * @param  $id;
+     *
+     * @return Array
+     */
+    public function showUser($id)
+    {
+        $user = $this->userRepository->findById($id);
+
+        return [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+        ];
+    }
 }

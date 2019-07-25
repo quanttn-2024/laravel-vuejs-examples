@@ -55,7 +55,7 @@ export default {
     data() {
         return {
             member: {
-                id: null,
+                id: this.$route.params.id || null,
                 name: '',
                 email: '',
                 password: 123456,
@@ -67,7 +67,23 @@ export default {
         ...mapState({
             createSucces: state => state.storeMember.createSucces,
             errors: state => state.storeMember.errors,
+            detailMember: state => state.storeMember.detailMember,
         }),
+    },
+
+    watch: {
+        detailMember() {
+            this.member = this.detailMember;
+        },
+    },
+
+    async created() {
+        if (this.member.id) {
+            this.$store.dispatch('actionShowMember', {
+                vue: this,
+                id: this.member.id,
+            });
+        }
     },
 
     methods: {

@@ -12,14 +12,28 @@ const routes = [{
     children: [{
         path: '/members',
         name: 'Members',
-        component: MemberList,
-    },
-    {
-        path: '/members/create',
-        name: 'Member Create',
-        component: MemberForm,
-    }
-    ]
+        component: {
+            render(c) {
+                return c('router-view');
+            },
+        },
+        children: [
+            {
+                path: '',
+                component: MemberList,
+            },
+            {
+                path: 'create',
+                name: 'Member Create',
+                component: MemberForm,
+            },
+            {
+                path: 'edit/:id',
+                name: 'Member Edit',
+                component: MemberForm,
+            }
+        ]
+    },]
 // {
 //     path: '*',
 //     name: 'Error Page',
