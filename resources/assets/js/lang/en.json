@@ -2,6 +2,13 @@
     "common": {
         "success": "Success",
         "members": "Members",
-        "logout": "Logout"
+        "logout": "Logout",
+        "create": "Create",
+        "number": "Number",
+        "name": "Name",
+        "email": "Email",
+        "dashboard": "Dashboard",
+        "publish": "Publish",
+        "back": "Back"
     }
 }
