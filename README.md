@@ -45,5 +45,8 @@ yarn run watch
 ```
 
 Run the development PHP Built-in server.
+```bash
+php artisan ser
+```
 
 > After running install, Application run in port 80. Visit http://localhost:8000/
