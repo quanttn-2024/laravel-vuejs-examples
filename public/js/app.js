@@ -18518,6 +18518,14 @@ var MemberService = function () {
     }, {
         key: 'save',
         value: function save(member) {
+            if (member.id) {
+                return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.put('/api/users/' + member.id, member).then(function (response) {
+                    return response;
+                }).catch(function (error) {
+                    return error;
+                });
+            }
+
             return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/users', member).then(function (response) {
                 return response;
             }).catch(function (error) {

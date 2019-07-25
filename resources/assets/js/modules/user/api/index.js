@@ -21,6 +21,12 @@ export default class MemberService {
      * @returns {AxiosPromise<any>}
      */
     static save(member) {
+        if (member.id) {
+            return axios.put(`/api/users/${ member.id }`, member)
+                .then(response => response)
+                .catch(error => error);
+        }
+
         return axios.post('/api/users', member)
             .then(response => response)
             .catch(error => error);

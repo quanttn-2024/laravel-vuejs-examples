@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Requests\SaveUserRequest;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -89,13 +90,15 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User  $user
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SaveUserRequest $request, User $user)
     {
-        //
+        $user = $this->userService->updateUser($request->all(), $user);
+
+        return response()->json(['success' => $user]);
     }
 
     /**

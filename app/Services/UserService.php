@@ -77,6 +77,26 @@ class UserService
         ];
     }
 
+    /**
+     * Update a user
+     *
+     * @param  array  $input
+     * @param  User $user
+     *
+     * @return bool
+     */
+    public function updateUser($input, $user)
+    {
+        try {
+            $user = $this->userRepository->update($user, $input);
+
+            return $user;
+        } catch (Exception $ex) {
+            report($ex);
+
+            return false;
+        }
+    }
 
     /**
      * Delete user by id
