@@ -12,4 +12,17 @@ export default class MemberService {
             .then(response => response)
             .catch(error => error);
     }
+
+    /**
+     * Create a member
+     *
+     * @param member
+     *
+     * @returns {AxiosPromise<any>}
+     */
+    static save(member) {
+        return axios.post('/api/users', member)
+            .then(response => response)
+            .catch(error => error);
+    }
 }

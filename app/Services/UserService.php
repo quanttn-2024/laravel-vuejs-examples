@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Exception;
 use App\Repositories\User\UserRepositoryInterface;
 
 /**
@@ -37,5 +38,24 @@ class UserService
         $users = $this->userRepository->getAll();
 
         return $users;
+    }
+
+    /**
+     * Create a user
+     *
+     * @param array $input
+     *
+     * @return bool|\Illuminate\Database\Eloquent\Model
+     */
+    public function createUser($input)
+    {
+        try {
+            $user = $this->userRepository->create($input);
+            return $user;
+        } catch (Exception $ex) {
+            report($ex);
+
+            return false;
+        }
     }
 }

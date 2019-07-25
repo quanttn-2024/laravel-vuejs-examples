@@ -10,6 +10,7 @@
         "dashboard": "Dashboard",
         "publish": "Publish",
         "back": "Back",
-        "actions": "Actions"
+        "actions": "Actions",
+        "save": "Save"
     }
 }
