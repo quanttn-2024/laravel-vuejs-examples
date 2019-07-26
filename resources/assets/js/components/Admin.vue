@@ -3,7 +3,7 @@
         <app-header></app-header>
         <app-aside></app-aside>
         <div class="content-wrapper">
-            <app-breadcrumd></app-breadcrumd>
+            <app-breadcrumd :list="listRoute"></app-breadcrumd>
             <section class="content">
                 <router-view></router-view>
             </section>
@@ -18,15 +18,21 @@ import AppAside from '@/components/aside/views/Aside';
 import AppBreadcrumd from '@/components/breadcrumb/Breadcrumb';
 import AppFooter from '@/components/footer/Footer';
 
-    export default {
-        name: 'Admin',
-        components: {
-            AppHeader,
-            AppAside,
-            AppBreadcrumd,
-            AppFooter,
+export default {
+    name: 'Admin',
+    components: {
+        AppHeader,
+        AppAside,
+        AppBreadcrumd,
+        AppFooter,
+    },
+
+    computed: {
+        listRoute() {
+            return this.$route.matched;
         },
-    }
+    },
+}
 </script>
 
 <style>
