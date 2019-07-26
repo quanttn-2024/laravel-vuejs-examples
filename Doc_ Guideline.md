@@ -64,7 +64,7 @@ Dùng để import những layout và sử dụng router-view để gọi tới 
 
 Dùng để import các components hoặc modules rồi khởi tạo các router để có thể gọi tới các components hoặc modules đó.
 
-###. js/store.js
+### .js/store.js
 
 Ở đây sẽ cần import VueX và tập trung các store dữ liệu từ các modules khác bằng cách import các store đó vào.
 
